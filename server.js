@@ -1,11 +1,16 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'public')))
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://MongoUser:Madara123!@ds241055.mlab.com:41055/usersdatabase');
+mongoose.connect('mongodb://MongoUser:Madara123!@ds241055.mlab.com:41055/usersdatabase',
+{
+    useNewUrlParser: true
+});
 
 const userSchema = new Schema({
     name: String,
@@ -149,10 +154,10 @@ Promise.all([kenny.save(), mark.save(), benny.save()])
     .then(findBennyAndRemove)
     .catch(console.log.bind(console))
 
+mongoose.connection.close();
+
 app.get('/', function(req,res){
-    res.send('Hello, everything went perfect');
+    res.sendFile('index.html');
 });
 
-app.listen(3000, function(){
-    console.log('App listening on port 3000');
-})
+app.listen(3000, () => console.log("Application listening on port 3000"));
