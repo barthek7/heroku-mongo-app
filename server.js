@@ -150,5 +150,9 @@ Promise.all([kenny.save(), mark.save(), benny.save()])
     .catch(console.log.bind(console))
 
 app.get('/', function(req,res){
-    res.end('Hello, everything went perfect');
+    res.send('Hello, everything went perfect');
 });
+
+app.listen(3000, function(){
+    console.log('App listening on port 3000');
+})
