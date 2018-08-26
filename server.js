@@ -1,5 +1,8 @@
+const express = require('express');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
+const app = express();
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://MongoUser:Madara123!@ds241055.mlab.com:41055/usersdatabase');
@@ -145,3 +148,7 @@ Promise.all([kenny.save(), mark.save(), benny.save()])
     .then(findKennyAndDelete)
     .then(findBennyAndRemove)
     .catch(console.log.bind(console))
+
+app.get('/', function(req,res){
+    res.end('Hello, everything went perfect');
+});
